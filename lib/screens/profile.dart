@@ -11,10 +11,7 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: Image.asset(
-          'assets/images/logo.png',
-          height: 40,
-        ),
+        title: Image.asset('assets/images/logo.png', height: 40),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -22,51 +19,26 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // User avatar
               CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('assets/images/bitmoji.png'),
               ),
               const SizedBox(height: 20),
-
-              // User name
               const Text(
                 "Abdullah",
                 style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
               ),
               const SizedBox(height: 8),
-
-              // User email
               const Text(
                 "abdullah@example.com",
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 30),
-
-              // Cards for Profile Options
-              ProfileOptionCard(
-                icon: Icons.edit,
-                title: "Edit Profile",
-                onTap: () {},
-              ),
-              ProfileOptionCard(
-                icon: Icons.lock_outline,
-                title: "Change Password",
-                onTap: () {},
-              ),
-              ProfileOptionCard(
-                icon: Icons.history,
-                title: "Course History",
-                onTap: () {},
-              ),
-              ProfileOptionCard(
-                icon: Icons.logout,
-                title: "Logout",
-                onTap: () {},
-              ),
+              ProfileOptionCard(icon: Icons.edit, title: "Edit Profile", onTap: () {}),
+              ProfileOptionCard(icon: Icons.lock_outline, title: "Change Password", onTap: () {}),
+              ProfileOptionCard(icon: Icons.history, title: "Course History", onTap: () {}),
+              ProfileOptionCard(icon: Icons.logout, title: "Logout", onTap: () {}),
             ],
           ),
         ),
@@ -75,18 +47,12 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-// ------------------- Profile Option Card -------------------
 class ProfileOptionCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
 
-  const ProfileOptionCard({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.onTap,
-  });
+  const ProfileOptionCard({super.key, required this.icon, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +68,7 @@ class ProfileOptionCard extends StatelessWidget {
             children: [
               Icon(icon, color: Colors.blue, size: 28),
               const SizedBox(width: 20),
-              Text(
-                title,
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
+              Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black)),
               const Spacer(),
               const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
             ],

@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'course_detail.dart';
 
 class CoursesScreen extends StatefulWidget {
-  const CoursesScreen({super.key});
+  final List<Map<String, String>> bookmarkedCourses;
+  final Function(Map<String, String>) onBookmarkToggle;
+
+  const CoursesScreen({
+    super.key,
+    required this.bookmarkedCourses,
+    required this.onBookmarkToggle,
+  });
 
   @override
   State<CoursesScreen> createState() => _CoursesScreenState();
@@ -98,48 +105,91 @@ class _CoursesScreenState extends State<CoursesScreen> {
                 ),
                 itemBuilder: (context, index) {
                   final course = filteredCourses[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              CourseDetailScreen(courseName: course['title']!),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.vertical(top: Radius.circular(15)),
-                              child: Image.asset(
-                                course['image']!,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
+                  final isBookmarked =
+                      widget.bookmarkedCourses.contains(course);
+
+                  return Stack(
+                    children: [
+                      // Entire course card
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => CourseDetailScreen(
+                                  courseName: course['title']!),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.blue[50],
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(15)),
+                                  child: Image.asset(
+                                    course['image']!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      course['title']!,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      course['subtitle']!,
+                                      style: const TextStyle(
+                                          fontSize: 12, color: Colors.grey),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              course['title']!,
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      // Save/bookmark icon on top-right
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                              isBookmarked
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_outline,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                              widget.onBookmarkToggle(course);
+                            },
+                            iconSize: 28,
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),

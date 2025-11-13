@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'routes.dart';
+import 'screens/splash.dart';
 
 void main() {
-  runApp(RemoteSolApp());
+  runApp(const RemoteSolApp());
 }
 
 class RemoteSolApp extends StatelessWidget {
+  const RemoteSolApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'remotesol',
+      title: 'RemoteSol Courses',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: Routes.splash,
-      routes: Routes.getRoutes(),
+      home: const SplashScreen(),
     );
   }
 }
