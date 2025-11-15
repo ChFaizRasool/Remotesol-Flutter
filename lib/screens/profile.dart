@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'login.dart'; // import LoginScreen
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
+
+  Future<void> _logout(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('isLoggedIn'); // clear saved login status
+
+    // Navigate to LoginScreen and remove all previous routes
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +39,24 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Text(
-                "Abdullah",
+                "Faiz",
                 style: TextStyle(
                     fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
               ),
               const SizedBox(height: 8),
               const Text(
-                "abdullah@example.com",
+                "faiz@example.com",
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 30),
               ProfileOptionCard(icon: Icons.edit, title: "Edit Profile", onTap: () {}),
               ProfileOptionCard(icon: Icons.lock_outline, title: "Change Password", onTap: () {}),
               ProfileOptionCard(icon: Icons.history, title: "Course History", onTap: () {}),
-              ProfileOptionCard(icon: Icons.logout, title: "Logout", onTap: () {}),
+              ProfileOptionCard(
+                icon: Icons.logout,
+                title: "Logout",
+                onTap: () => _logout(context), // call logout function
+              ),
             ],
           ),
         ),

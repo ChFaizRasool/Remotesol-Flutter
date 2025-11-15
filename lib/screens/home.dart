@@ -127,7 +127,7 @@ class _DashboardTabState extends State<DashboardTab> {
       "title": "Machine Learning Starter",
       "subtitle": "ML for beginners",
       "category": "Machine Learning",
-      "image": "assets/images/course4.png"
+      "image": "assets/images/course5.png"
     },
   ];
 
@@ -319,8 +319,10 @@ class _DashboardTabState extends State<DashboardTab> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) =>
-                              CourseDetailScreen(courseName: course['title']!),
+                          builder: (_) => CourseDetailScreen(
+                            courseName: course['title']!,
+                            courseImage: course['image']!, // pass the correct image
+                          ),
                         ),
                       );
                     },
@@ -437,6 +439,11 @@ class _BookmarksTabState extends State<BookmarksTab> {
       "subtitle": "Data Analysis with Python",
       "image": "assets/images/course4.png"
     },
+    {
+      "title": "Machine Learning Starter",
+      "subtitle": "ML for beginners",
+      "image": "assets/images/course5.png"
+    },
   ];
 
   void _removeBookmark(int courseIndex) {
@@ -484,7 +491,7 @@ class _BookmarksTabState extends State<BookmarksTab> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
-                  childAspectRatio: 3 / 4,
+                  childAspectRatio: 3 / 3,
                 ),
                 itemBuilder: (context, index) {
                   final course = bookmarkedCourses[index];
@@ -514,12 +521,14 @@ class _BookmarksTabState extends State<BookmarksTab> {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => CourseDetailScreen(
-                                courseName: course['title']!),
-                          ),
-                        );
+  context,
+  MaterialPageRoute(
+    builder: (_) => CourseDetailScreen(
+      courseName: course['title']!,
+      courseImage: course['image']!, // pass the correct image
+    ),
+  ),
+);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -591,6 +600,11 @@ class CoursesTab extends StatelessWidget {
         "subtitle": "Data Analysis with Python",
         "image": "assets/images/course4.png"
       },
+      {
+        "title": "Machine Learning Starter",
+        "subtitle": "ML for beginners",
+        "image": "assets/images/course5.png"
+      },
     ];
 
     return Scaffold(
@@ -616,12 +630,14 @@ class CoursesTab extends StatelessWidget {
               onTap: () {
                 // ✅ Navigate to the course detail screen when tapped
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        CourseDetailScreen(courseName: course['title']!),
-                  ),
-                );
+  context,
+  MaterialPageRoute(
+    builder: (_) => CourseDetailScreen(
+      courseName: course['title']!,
+      courseImage: course['image']!, // pass the correct image
+    ),
+  ),
+);
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -707,15 +723,23 @@ class SettingsTab extends StatelessWidget {
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.lock_outline, color: Colors.blue),
+            title: Text("Privacy"),
+            trailing: Icon(Icons.arrow_forward_ios, size: 16),
+          ),
+          Divider(), 
+          ListTile(
+            leading: Icon(Icons.help_outline, color: Colors.blue),
+            title: Text("Help & Support"),
+            trailing: Icon(Icons.arrow_forward_ios, size: 16), 
+          ),   
+          Divider(),    
+          ListTile(
             leading: Icon(Icons.info_outline, color: Colors.blue),
             title: Text("About App"),
             trailing: Icon(Icons.arrow_forward_ios, size: 16),
           ),
           Divider(),
-          ListTile(
-            leading: Icon(Icons.logout, color: Colors.red),
-            title: Text("Logout"),
-          ),
         ],
       ),
     );

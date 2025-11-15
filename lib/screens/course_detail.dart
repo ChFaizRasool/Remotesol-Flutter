@@ -3,8 +3,13 @@ import 'course_modules.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   final String courseName;
+  final String courseImage; // <-- already added
 
-  const CourseDetailScreen({super.key, required this.courseName});
+  const CourseDetailScreen({
+    super.key,
+    required this.courseName,
+    required this.courseImage, // <-- already added
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +34,11 @@ class CourseDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Course Image
+            // ✅ Use dynamic course image here
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.asset(
-                'assets/images/course1.png',
+                courseImage, // <-- changed from hardcoded image
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
@@ -90,7 +95,8 @@ class CourseDetailScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CourseModulesScreen(courseName: courseName),
+                      builder: (_) =>
+                          CourseModulesScreen(courseName: courseName),
                     ),
                   );
                 },

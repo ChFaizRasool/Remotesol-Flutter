@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
 import 'signup.dart';
 import 'forget.dart';
@@ -77,7 +78,11 @@ class LoginScreen extends StatelessWidget {
 
               // Login Button
               GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  // Store login state
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('isLoggedIn', true);
+
                   // Navigate to HomeScreen after login
                   Navigator.pushReplacement(
                     context,

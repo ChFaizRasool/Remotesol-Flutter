@@ -96,7 +96,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (_) =>
-                        CourseDetailScreen(courseName: course['title']!),
+                        CourseDetailScreen(courseName: course['title']!, courseImage: '',),
                   ),
                 );
               },

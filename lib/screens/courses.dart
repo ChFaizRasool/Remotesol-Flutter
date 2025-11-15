@@ -117,7 +117,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (_) => CourseDetailScreen(
-                                  courseName: course['title']!),
+                                  courseName: course['title']!, courseImage: '',),
                             ),
                           );
                         },
