@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:remotesol/screens/about_app.dart';
+import 'package:remotesol/screens/help_support.dart';
+import 'package:remotesol/screens/notifications.dart';
+import 'package:remotesol/screens/privacy.dart';
 import 'course_detail.dart';
 import 'profile.dart';
+import 'settings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -445,6 +450,8 @@ class _BookmarksTabState extends State<BookmarksTab> {
       "image": "assets/images/course5.png"
     },
   ];
+  
+  get width => null;
 
   void _removeBookmark(int courseIndex) {
     setState(() {
@@ -463,21 +470,8 @@ class _BookmarksTabState extends State<BookmarksTab> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
-        title: Row(
-          children: [
-            Image.asset(
-              'assets/images/logo.png',
-              width: 30,
-              height: 30,
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              "Bookmarks",
-              style: TextStyle(color: Colors.black),
-            ),
-          ],
-        ),
-        iconTheme: const IconThemeData(color: Colors.black),
+        centerTitle: true,
+        title: Image.asset('assets/images/logo.png', height: 40),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -709,38 +703,57 @@ class SettingsTab extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: const [
-          ListTile(
-            leading: Icon(Icons.person_outline, color: Colors.blue),
-            title: Text("Account Settings"),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.notifications_outlined, color: Colors.blue),
-            title: Text("Notifications"),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.lock_outline, color: Colors.blue),
-            title: Text("Privacy"),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
-          ),
-          Divider(), 
-          ListTile(
-            leading: Icon(Icons.help_outline, color: Colors.blue),
-            title: Text("Help & Support"),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16), 
-          ),   
-          Divider(),    
-          ListTile(
-            leading: Icon(Icons.info_outline, color: Colors.blue),
-            title: Text("About App"),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
-          ),
-          Divider(),
-        ],
+        children: [
+  ListTile(    
+    leading: Icon(Icons.notifications_outlined, color: Colors.blue),
+    title: Text("Notifications"),
+    trailing: Icon(Icons.arrow_forward_ios, size: 16),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+      );
+    },
+  ),
+  Divider(),
+  ListTile(
+    leading: Icon(Icons.lock_outline, color: Colors.blue),
+    title: Text("Privacy"),
+    trailing: Icon(Icons.arrow_forward_ios, size: 16),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const PrivacyScreen()),
+      );
+    },
+  ),
+  Divider(),
+  ListTile(
+    leading: Icon(Icons.help_outline, color: Colors.blue),
+    title: Text("Help & Support"),
+    trailing: Icon(Icons.arrow_forward_ios, size: 16),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HelpSupportScreen()),
+      );
+    },
+  ),
+  Divider(),
+  ListTile(
+    leading: Icon(Icons.info_outline, color: Colors.blue),
+    title: Text("About App"),
+    trailing: Icon(Icons.arrow_forward_ios, size: 16),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const AboutAppScreen()),
+      );
+    },
+  ),
+  Divider(),
+]
+
       ),
     );
   }

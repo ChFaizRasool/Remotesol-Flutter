@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login.dart'; // import LoginScreen
+import 'edit_profile.dart';
+import 'change_password.dart';
+import 'course_history.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -49,9 +53,39 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 30),
-              ProfileOptionCard(icon: Icons.edit, title: "Edit Profile", onTap: () {}),
-              ProfileOptionCard(icon: Icons.lock_outline, title: "Change Password", onTap: () {}),
-              ProfileOptionCard(icon: Icons.history, title: "Course History", onTap: () {}),
+              ProfileOptionCard(
+                icon: Icons.edit,
+                title: "Edit Profile",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const EditProfileScreen()),
+                  );
+                },
+              ),
+
+              ProfileOptionCard(
+                icon: Icons.lock_outline,
+                title: "Change Password",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ChangePasswordScreen()),
+                  );
+                },
+              ),
+
+              ProfileOptionCard(
+                icon: Icons.history,
+                title: "Course History",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CourseHistoryScreen()),
+                  );
+                },
+              ),
+
               ProfileOptionCard(
                 icon: Icons.logout,
                 title: "Logout",
