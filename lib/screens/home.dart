@@ -5,7 +5,6 @@ import 'package:remotesol/screens/notifications.dart';
 import 'package:remotesol/screens/privacy.dart';
 import 'course_detail.dart';
 import 'profile.dart';
-import 'settings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

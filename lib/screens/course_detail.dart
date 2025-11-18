@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'course_modules.dart';
+import 'payment_screen.dart'; // <-- NEW IMPORT
 
 class CourseDetailScreen extends StatelessWidget {
   final String courseName;
-  final String courseImage; // <-- already added
+  final String courseImage;
 
   const CourseDetailScreen({
     super.key,
     required this.courseName,
-    required this.courseImage, // <-- already added
+    required this.courseImage,
   });
 
   @override
@@ -34,11 +35,10 @@ class CourseDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ✅ Use dynamic course image here
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.asset(
-                courseImage, // <-- changed from hardcoded image
+                courseImage,
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
@@ -46,7 +46,6 @@ class CourseDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Course Title
             Text(
               courseName,
               style: const TextStyle(
@@ -57,7 +56,6 @@ class CourseDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            // Instructor Info
             const Row(
               children: [
                 CircleAvatar(
@@ -73,14 +71,13 @@ class CourseDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Description
             const Text(
               "This course will help you master the fundamentals of Flutter development with real-world examples and hands-on exercises. Learn to build beautiful, responsive, and high-performance mobile applications.",
               style: TextStyle(fontSize: 14, color: Colors.black87, height: 1.5),
             ),
             const SizedBox(height: 25),
 
-            // Button to go to modules
+            // START COURSE BUTTON
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
@@ -103,6 +100,37 @@ class CourseDetailScreen extends StatelessWidget {
                 icon: const Icon(Icons.play_arrow, color: Colors.white),
                 label: const Text(
                   "Start Course",
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // 🔵 BUY COURSE BUTTON (NEW)
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue, // same color scheme
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PaymentScreen(
+                        courseName: courseName,
+                      ),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.payment, color: Colors.white),
+                label: const Text(
+                  "Buy Course",
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),

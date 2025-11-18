@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/splash.dart';
-import 'screens/login.dart'; // make sure this screen exists
+// make sure this screen exists
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,8 @@ class RemoteSolApp extends StatelessWidget {
       ),
 
       // Step 2: Auto redirect based on login status
-      home: isLoggedIn ? const SplashScreen() : const LoginScreen(),
+      home: const SplashScreen(),
+
     );
   }
 }
